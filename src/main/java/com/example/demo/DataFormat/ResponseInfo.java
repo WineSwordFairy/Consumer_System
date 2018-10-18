@@ -1,12 +1,14 @@
 package com.example.demo.DataFormat;
 
-public class ResponseInfo {
+import java.io.Serializable;
+
+public class ResponseInfo implements Serializable {
 
     private int code;
 
     private String message;
 
-    private String Data;
+    private Object Data;
 
     public int getCode() {
         return code;
@@ -24,21 +26,26 @@ public class ResponseInfo {
         this.message = message;
     }
 
-    public String getData() {
+    public Object getData() {
         return Data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         Data = data;
     }
 
-    public ResponseInfo(int code, String message, String data) {
+    public ResponseInfo(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         Data = data;
 
     }
 
+    public ResponseInfo() {
+    }
 
-
+    public ResponseInfo(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 }
