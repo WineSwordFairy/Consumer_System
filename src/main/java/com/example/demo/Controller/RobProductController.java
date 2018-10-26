@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class RobProductController {
     ///减商品库存接口地址。
     private String lessProductCountUrl = "http://localhost:8089/BuyProductByRedis";
-    private String lessProductCountUrlParam = "accountId=257030&productId=536563&count=1";
+    private String lessProductCountUrlParam = "";
 
     ///下订单接口地址。
     private String createOrderUrl = "http://localhost:8085/CreateOrder";
-    private String createOrderUrlParam = "productId=536563&accountId=257030&remark=mark&count=2";
+    private String createOrderUrlParam = "";
 
     @RequestMapping("/RobProduct")
-    public String Index() {
+    public String Index(int accountId, int productId, int count, String remark) {
+
+        ///参数处理。
+        lessProductCountUrlParam = String.format("accountId=%d&productId=%d&count=%d", accountId, productId, count);
+        createOrderUrlParam = String.format("accountId=%d&productId=%d&&count=%d&remark=%f", accountId, productId, count, remark);
 
         ///CallInterface,减商品库存。
         String lessProductResult = HttpRequest.sendGet(lessProductCountUrl, lessProductCountUrlParam);
